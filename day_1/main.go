@@ -49,34 +49,14 @@ func main() {
 
 	}
 	fmt.Println(totalDistance)
-	var times []int
-	l := 0
-	r := 0
-	count := 0
-	var store map[int]int
-	store = make(map[int]int)
-	for l < len(leftnums){
-		if value , ok := store[leftnums[l]]; ok {
-			times = append(times,value * leftnums[l])
-			l++
-			
-		}else if leftnums[l] < rightnums[r]{
-			store[leftnums[l]] = count
-			times = append(times,count * leftnums[l])
-			l++
-			count = 0
-		}else if leftnums[l] == rightnums[r] {
-			count += 1
-			r++
-		}else {
-			r++
-
-		}
+	rightmap := make(map[int]int)
+	for _, r := range rightnums {
+		rightmap[r]++
 	}
-
 	similarityScore := 0
-	for _, nums := range times {
-		similarityScore += nums
+	for _ ,l := range leftnums {
+		count := rightmap[l]
+		similarityScore += l * count
 	}
 	fmt.Println(similarityScore)
 
