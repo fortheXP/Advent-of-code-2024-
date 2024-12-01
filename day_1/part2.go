@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -15,14 +14,9 @@ func parse(s string) int {
 	}
 	return num
 }
-func absdifference(a , b int) int {
-	if a > b {
-		return a - b
-	}
-	return b - a
-}
+
 func main() {
-	readFile , err := os.Open("../input.txt")
+	readFile , err := os.Open("input.txt")
 	if err!= nil {
 		fmt.Println(err)
 	}
@@ -40,15 +34,6 @@ func main() {
 		leftnums = append(leftnums,lnum)
 		rightnums = append(rightnums,rnum)
 	}
-	sort.Ints(leftnums)
-	sort.Ints(rightnums)
-	totalDistance := 0
-
-	for i :=0;i < len(leftnums); i++{
-		totalDistance += absdifference(leftnums[i],rightnums[i])
-
-	}
-	fmt.Println(totalDistance)
 	rightmap := make(map[int]int)
 	for _, r := range rightnums {
 		rightmap[r]++
@@ -59,7 +44,6 @@ func main() {
 		similarityScore += l * count
 	}
 	fmt.Println(similarityScore)
-
-
 	readFile.Close()
+
 }
